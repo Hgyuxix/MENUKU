@@ -28,6 +28,8 @@ def view_order(order):
         print(f"Total: Rp{total}")
 
 # Fungsi untuk melakukan pembayaran
+from PIL import Image
+
 def generate_qr_code(order):
     if not order:
         print("⚠ Pesanan kosong, tidak ada yang perlu dibayar.")
@@ -47,10 +49,15 @@ def generate_qr_code(order):
     qr.add_data(payment_data)
     qr.make(fit=True)
     qr_code_img = qr.make_image(fill_color="black", back_color="white")
+    
+    # Menyimpan gambar QR
     qr_code_img.save("payment_qr.png")
     print("✅ QR Code untuk pembayaran telah dibuat (payment_qr.png).")
     print("Silakan pindai untuk membayar.")
-
+    
+    # Menampilkan gambar QR menggunakan PIL
+    qr_code_img.show()  # Ini akan membuka gambar QR di aplikasi default
+    
 # Menu caffeshop
 menu = {
     "Espresso": 20000,
