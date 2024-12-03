@@ -57,14 +57,17 @@ def view_order(order):
         print(f"Total: Rp{total}")
 
 # Fungsi untuk menampilkan QR Code yang sudah ada
-def show_existing_qr_code():
-    try:
-        # Memuat QR Code dari file (misalnya 'my_qr_code.png')
-        qr_code_img = Image.open('my_qr_code.png')
-        qr_code_img.show()  # Menampilkan gambar menggunakan aplikasi default
-        print("✅ QR Code ditampilkan.")
-    except FileNotFoundError:
-        print("⚠ File QR Code tidak ditemukan.")
+from PIL import Image
+
+# Membuka file gambar
+image = Image.open('d:\cs qr\qrthoriq.png')  # Ganti dengan nama file gambar Anda
+
+# Informasi tentang gambar
+print("Format:", image.format)
+print("Ukuran:", image.size)
+print("Mode:", image.mode)
+
+
 
 # Menu caffeshop
 menu = {
@@ -102,7 +105,7 @@ while True:
     elif choice == "3":
         view_order(order)
     elif choice == "4":
-        show_existing_qr_code()  # Menampilkan QR Code Anda sendiri
+        image.show()  # Menampilkan QR Code Anda sendiri
     elif choice == "5":
         print("Terima kasih telah mengunjungi caffeshop kami!")
         break
