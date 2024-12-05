@@ -1,3 +1,4 @@
+import qrcode
 
 # Fungsi untuk menampilkan menu
 def show_menu():
