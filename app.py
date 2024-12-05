@@ -1,3 +1,53 @@
+from PIL import Image  # Import image dari PIL (Pillow)
+import os
+# import modul lain yang Anda butuhkan
+
+from flask import Flask, request, render_template_string
+import os
+
+app = Flask(__name__)
+
+# Tentukan direktori untuk menyimpan file yang diupload
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Pastikan direktori upload ada
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Rute untuk menampilkan form upload gambar
+@app.route('/')
+def index():
+    return render_template_string('''
+    <html>
+    <body>
+        <h1>Upload Gambar</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+    </body>
+    </html>
+    ''')
+
+# Rute untuk menangani upload gambar
+@app.route('/upload', methods=['POST'])
+def upload_image():
+    if 'image' not in request.files:
+        return 'No file part', 400
+
+    file = request.files['image']
+
+    if file.filename == '':
+        return 'No selected file', 400
+
+    # Simpan file di folder uploads
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(filepath)
+    return f'Gambar berhasil di-upload! File disimpan di {filepath}'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
