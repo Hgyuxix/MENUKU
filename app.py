@@ -1,3 +1,4 @@
+import qrcode
 
 # Fungsi untuk menampilkan menu
 def show_menu():
@@ -59,7 +60,7 @@ def view_order(order):
 from PIL import Image
 
 # Membuka file gambar
-image = Image.open('d:\cs qr\qrthoriq.png')  # Ganti dengan nama file gambar Anda
+image = Image.open('qrthoriq.png')  # Ganti dengan nama file gambar Anda
 
 # Informasi tentang gambar
 print("Format:", image.format)
@@ -104,9 +105,12 @@ while True:
     elif choice == "3":
         view_order(order)
     elif choice == "4":
-        image.show()  # Menampilkan QR Code Anda sendiri
+        try:
+            image = Image.open('qrthoriq.png')
+        except FileNotFoundError:
+            print("⚠ File gambar tidak ditemukan. Pastikan file tersedia di jalur yang benar.")
+            image = None
+
     elif choice == "5":
         print("Terima kasih telah mengunjungi caffeshop kami!")
         break
-    else:
-        print("⚠ Pilihan tidak valid, silakan coba lagi.")
