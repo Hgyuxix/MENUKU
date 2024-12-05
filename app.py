@@ -116,7 +116,7 @@ def view_order(order):
         print(f"Total: Rp{total}")
 
 # Fungsi untuk menampilkan QR Code yang sudah ada
-
+from PIL import Image
 
 # Membuka file gambar
 image = Image.open('qrthoriq.png')  # Ganti dengan nama file gambar Anda
