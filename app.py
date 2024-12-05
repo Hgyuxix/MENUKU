@@ -1,31 +1,41 @@
-import qrcode
+from flask import Flask, render_template, request
 
-# Fungsi untuk menampilkan menu
-def show_menu():
-    print("=== Menu Caffeshop ===")
-    for item, price in menu.items():
-        print(f"{item}: Rp{price}")
+app = Flask(__name__)
 
-# Fungsi untuk menambahkan item ke pesanan
-def add_to_order(order, item, quantity):
+# Menu caffeshop
+menu = {
+    "Espresso": 20000,
+    "Latte": 25000,
+    "Cappuccino": 30000,
+    "Mocha": 35000,
+    "Tea": 15000,
+    "Cake Slice": 20000,
+}
+
+# Pesanan pelanggan
+order = {}
+
+@app.route("/")
+def index():
+    return render_template("index.html", menu=menu, order=order)
+
+@app.route("/add", methods=["POST"])
+def add_to_order():
+    item = request.form.get("item")
+    quantity = int(request.form.get("quantity", 1))
     if item in menu:
         order[item] = order.get(item, 0) + quantity
-        print(f"✅ {quantity}x {item} ditambahkan ke pesanan Anda.")
-    else:
-        print(f"⚠ {item} tidak ada di menu.")
+    return render_template("index.html", menu=menu, order=order)
 
-# Fungsi untuk melihat pesanan
-def view_order(order):
-    if not order:
-        print("Pesanan Anda kosong.")
-    else:
-        print("=== Pesanan Anda ===")
-        total = 0
-        for item, quantity in order.items():
-            price = menu[item] * quantity
-            total += price
-            print(f"{item} ({quantity}x): Rp{price}")
-        print(f"Total: Rp{total}")
+@app.route("/clear")
+def clear_order():
+    order.clear()
+    return render_template("index.html", menu=menu, order=order)
+
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
         
 from PIL import Image
 
