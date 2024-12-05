@@ -77,7 +77,7 @@ print("Format:", image.format)
 print("Ukuran:", image.size)
 print("Mode:", image.mode)
 
-
+image = Image.open('qrthoriq.png')
 
 # Menu caffeshop
 menu = {
