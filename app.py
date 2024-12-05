@@ -37,7 +37,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
         
-from PIL import Image
+
 
 # Fungsi untuk menampilkan menu
 def show_menu():
