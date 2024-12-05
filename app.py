@@ -1,5 +1,4 @@
-from PIL import Image  # Import image dari PIL (Pillow)
-import os
+
 # import modul lain yang Anda butuhkan
 
 from flask import Flask, request, render_template_string
